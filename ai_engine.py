@@ -12,9 +12,12 @@ except ImportError:
     TF_AVAILABLE = False
     print("Warning: TensorFlow not found. Running in MOCK mode.")
 
-# Load model and labels
-MODEL_PATH = os.path.join(os.path.dirname(__file__), '../public/model_unquant.tflite')
-LABELS_PATH = os.path.join(os.path.dirname(__file__), '../public/labels.txt')
+# Load model and labels (check locally first, then fallback to public directory)
+LOCAL_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'model_unquant.tflite')
+LOCAL_LABELS_PATH = os.path.join(os.path.dirname(__file__), 'labels.txt')
+
+MODEL_PATH = LOCAL_MODEL_PATH if os.path.exists(LOCAL_MODEL_PATH) else os.path.join(os.path.dirname(__file__), '../public/model_unquant.tflite')
+LABELS_PATH = LOCAL_LABELS_PATH if os.path.exists(LOCAL_LABELS_PATH) else os.path.join(os.path.dirname(__file__), '../public/labels.txt')
 
 interpreter = None
 labels = []

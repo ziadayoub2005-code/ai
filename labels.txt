@@ -1,0 +1,4 @@
+0 Cardboard
+1 Plastic
+2 Glass
+3 Metal_Can
